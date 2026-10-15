@@ -1,0 +1,197 @@
+{
+  "name": "qidian-reader-personal",
+  "displayName": "起点阅读（个人版）",
+  "description": "在 VS Code 侧边栏浏览起点作品并阅读账号可访问的章节",
+  "version": "0.5.3",
+  "publisher": "personal-local",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onView:qidian.catalog"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "qidian",
+          "title": "起点阅读",
+          "icon": "resources/book.svg"
+        }
+      ]
+    },
+    "views": {
+      "qidian": [
+        {
+          "id": "qidian.catalog",
+          "name": "发现 / 书架 / 正文",
+          "type": "webview"
+        },
+        {
+          "id": "qidian.comments",
+          "name": "段评",
+          "type": "webview",
+          "when": "qidian.reading"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "qidian.discover",
+        "title": "切换到发现",
+        "category": "起点阅读",
+        "icon": "$(home)"
+      },
+      {
+        "command": "qidian.importDiscover",
+        "title": "从浏览器页面源码导入发现",
+        "category": "起点阅读",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "qidian.shelf",
+        "title": "切换到书架",
+        "category": "起点阅读",
+        "icon": "$(library)"
+      },
+      {
+        "command": "qidian.history",
+        "title": "阅读历史",
+        "category": "起点阅读"
+      },
+      {
+        "command": "qidian.search",
+        "title": "搜索作品",
+        "category": "起点阅读",
+        "icon": "$(search)"
+      },
+      {
+        "command": "qidian.refresh",
+        "title": "刷新",
+        "category": "起点阅读",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "qidian.login",
+        "title": "登录 / 查看账号（普通 Edge）",
+        "category": "起点阅读",
+        "icon": "$(account)"
+      },
+      {
+        "command": "qidian.connectEdge",
+        "title": "连接普通 Edge 并复制配对码",
+        "category": "起点阅读",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "qidian.logout",
+        "title": "断开 Edge 并清除阅读记录",
+        "category": "起点阅读"
+      },
+      {
+        "command": "qidian.openBook",
+        "title": "打开作品",
+        "category": "起点阅读"
+      },
+      {
+        "command": "qidian.openChapter",
+        "title": "阅读章节",
+        "category": "起点阅读"
+      },
+      {
+        "command": "qidian.openUrl",
+        "title": "通过 URL 阅读章节",
+        "category": "起点阅读"
+      },
+      {
+        "command": "qidian.openEditor",
+        "title": "在编辑区阅读",
+        "category": "起点阅读"
+      },
+      {
+        "command": "qidian.continue",
+        "title": "继续阅读",
+        "category": "起点阅读"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "qidian.discover",
+          "when": "view == qidian.catalog",
+          "group": "navigation@1"
+        },
+        {
+          "command": "qidian.importDiscover",
+          "when": "view == qidian.catalog",
+          "group": "navigation@1.5"
+        },
+        {
+          "command": "qidian.connectEdge",
+          "when": "view == qidian.catalog",
+          "group": "navigation@1.7"
+        },
+        {
+          "command": "qidian.login",
+          "when": "view == qidian.catalog",
+          "group": "navigation@1.8"
+        },
+        {
+          "command": "qidian.shelf",
+          "when": "view == qidian.catalog",
+          "group": "navigation@2"
+        },
+        {
+          "command": "qidian.search",
+          "when": "view == qidian.catalog",
+          "group": "navigation@3"
+        },
+        {
+          "command": "qidian.refresh",
+          "when": "view == qidian.catalog",
+          "group": "navigation@4"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "起点阅读",
+      "properties": {
+        "qidian.fontSize": {
+          "type": "number",
+          "default": 16,
+          "minimum": 12,
+          "maximum": 28,
+          "description": "正文字号"
+        },
+        "qidian.theme": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "description": "阅读主题"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "package": "npm test && vsce package --allow-missing-repository"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0-rc.12",
+    "puppeteer-core": "^23.11.1",
+    "ws": "8.22.0"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.9.2"
+  }
+}

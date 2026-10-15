@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "起点阅读 · VS Code 页面传送",
+  "version": "0.4.1",
+  "description": "配对后将正常显示的起点页面同步到本机 VS Code 扩展；可关闭自动同步，不读取 Cookie 或密码。",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://*.qidian.com/*", "http://127.0.0.1:17843/*"],
+  "content_scripts": [{ "matches": ["https://*.qidian.com/*"], "js": ["extract.js", "comments.js", "content.js"], "run_at": "document_idle" }],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "发送当前起点页面到 VS Code", "default_popup": "popup.html" }
+}

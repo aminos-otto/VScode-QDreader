@@ -1,0 +1,27 @@
+# Dependencies and generated packages
+node_modules/
+*.vsix
+out/
+dist/
+coverage/
+.vscode-test/
+
+# Local editor and system files
+.vscode/
+*.code-workspace
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local credentials, browser captures, and logs
+.env
+.env.*
+!.env.example
+*.log
+*.har
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.db
